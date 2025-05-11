@@ -282,12 +282,12 @@ static thread		mainthread;				// The main thread context
 		static saveloc		*pframeinfo;
 
 		// These two functions are not static to prevent the compiler removing them as functions
-		void _gfxGetStackState(void) {
+		void __attribute__ ((noinline)) _gfxGetStackState(void) {
 			char *c;
 			pframeinfo->localptr = (char *)&c;
 			CXT_SAVE(pframeinfo->cxt);
 		}
-		void _gfxGetStackStateInFn(void) {
+		void __attribute__ ((noinline)) _gfxGetStackStateInFn(void) {
 			pframeinfo++;
 			_gfxGetStackState();
 			pframeinfo--;
