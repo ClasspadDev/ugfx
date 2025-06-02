@@ -7,7 +7,7 @@
 
 // Set this to your frame buffer pixel format.
 #ifndef GDISP_LLD_PIXELFORMAT
-	#define GDISP_LLD_PIXELFORMAT		GDISP_PIXELFORMAT_BGR565
+	#define GDISP_LLD_PIXELFORMAT		GDISP_PIXELFORMAT_RGB565
 #endif
 
 // Uncomment this if your frame buffer device requires flushing
