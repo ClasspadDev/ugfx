@@ -12,9 +12,7 @@
     #define GINPUT_TOUCH_NOCALIBRATE GFXON
 #endif
 
-#include <string.h>
-#include <sdk/calc/calc.h>
-#include <sdk/os/input.h>
+#include "capture_events.h"
 
 // Resolution and Accuracy Settings
 #define GMOUSE_MCU_PEN_CALIBRATE_ERROR		1
@@ -42,21 +40,12 @@ static gBool init_board(GMouse *m, unsigned driverinstance) {
     return gTrue;
 }
 
-static gCoord x, y, z = 0;
-
 static gBool read_xyz(GMouse *m, GMouseReading *prd) {
     (void)m;
-    struct Input_Event event;
-    memset(&event, 0, sizeof(event));
-    GetInput(&event, 0xFFFFFFFF, 0x10);
-    if (event.type == EVENT_TOUCH) {
-        z = (event.data.touch_single.direction & (TOUCH_DOWN | TOUCH_HOLD_DRAG)) != 0 ? 1 : 0;
-        x = event.data.touch_single.p1_x;
-        y = event.data.touch_single.p1_y;
-    }
-    prd->x = x;
-    prd->z = z;
-    prd->y = y;
+    CaptureEvents();
+    prd->x = touch.x;
+    prd->z = touch.z;
+    prd->y = touch.y;
     return gTrue;
 }
 
