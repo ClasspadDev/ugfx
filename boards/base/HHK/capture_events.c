@@ -97,7 +97,7 @@ static void HandleKeyEvent(const struct Input_Event * event) {
 }
 #else
 static void HandleKeyEvent(const struct Input_Event * event) {
-    (void)list_reserved;
+    (void)keys_list_reserved;
     (void)shift;
     (void)keyboard;
     (void)event;
